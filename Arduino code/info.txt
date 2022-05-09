@@ -1,1 +1,50 @@
-Zet hier de arduino code
+// Include the servo library:
+#include <Servo.h>
+
+// Create a new servo object:
+Servo myservo;
+
+// Define the servo pin:
+#define servoPin 9
+
+// Create a variable to store the servo position:
+int angle = 0;
+
+int buttonState = 0;
+
+// Create a variable
+const int buttonPin = 2;
+const int ledPin =  3;
+const int ledPin1 =  4;
+bool ledUit = 0;
+
+void setup() {
+  // Attach the Servo variable to a pin:
+  myservo.attach(servoPin);
+
+  pinMode(buttonPin, INPUT);
+  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin1, OUTPUT);
+  }
+
+
+void loop() {
+  buttonState = digitalRead(buttonPin);
+
+  if (ledUit == 0) {
+  digitalWrite(ledPin, HIGH);
+  }
+
+  if (buttonState == HIGH) {
+    digitalWrite(ledPin, LOW);
+    digitalWrite(ledPin1, HIGH);
+    ledUit += 1;
+
+    // Sweep from 0 to 180 degrees:
+    for (angle = 180; angle <= 270; angle += 1) {
+      myservo.write(angle);
+      delay(1500
+      .0);
+    }
+  }
+}
